@@ -43,6 +43,19 @@ public class CardWithDeliveryTest {
         $x("//*[@class =\"button__text\" ]").click();
         $x("//* [contains(text(),\"Успешно!\")]").should(visible, Duration.ofSeconds(12));
     }
+    @Test
+    public void test2() {
+
+        open("http://localhost:9999");
+        $x("//*[@placeholder = \"Город\"]").setValue("Калуга");
+        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("27.10.2022"));
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        $x("//*[@name = \"name\"]").setValue("Андреев Иван");
+        $x("//*[@name = \"phone\"]").setValue("+79126547467");
+        $x("//*[@data-test-id = \"agreement\"]").click();
+        $x("//*[@class =\"button__text\" ]").click();
+        $x("//* [contains(text(),\"Успешно!\")]").should(visible, Duration.ofSeconds(12));
+    }
 }
 
 
