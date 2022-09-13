@@ -153,7 +153,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void shouldCheckboxAgreement() {
+    public void shouldTestCheckboxAgreement() {
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
