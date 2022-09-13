@@ -22,7 +22,7 @@ public class CardWithDeliveryTest {
 
 
     @Test
-    public void test1() {
+    public void shouldSendingAFormWithValidData1() {
 
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
@@ -36,7 +36,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void test2() {
+    public void shouldSendingAFormWithValidData2() {
 
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Калуга");
@@ -50,7 +50,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void test3() {
+    public void shouldEnteringInvalidDataInTheCityField() {
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Kazan");
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
@@ -64,7 +64,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void test4() {
+    public void shouldClearingTheCityField() {
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("");
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
@@ -78,7 +78,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void test5() {
+    public void shouldClearingTheDateOfTheMeetingField() {
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern(""));
@@ -93,7 +93,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void test6() {
+    public void shouldEnteringInvalidDataInTheLastNameAndFirstNameField() {
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
@@ -108,7 +108,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void test7() {
+    public void shouldClearingTheLastNameAndFirstNameField() {
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
@@ -123,7 +123,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void test8() {
+    public void shouldEnteringInvalidDataInTheMobilePhoneField() {
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
@@ -138,7 +138,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void test9() {
+    public void shouldClearingTheMobilePhoneField() {
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
@@ -153,7 +153,7 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void test10() {
+    public void shouldCheckboxAgreement() {
         open("http://localhost:9999");
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
