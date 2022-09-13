@@ -159,7 +159,7 @@ public class CardWithDeliveryTest {
         String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
-        $x("//*[@name = \"phone\"]").setValue("9214567845");
+        $x("//*[@name = \"phone\"]").setValue("+79214567845");
         $x("//*[@class =\"button__text\" ]").click();
         $x("//* [contains(text(),\"Я соглашаюсь с условиями обработки и использования моих персональных данных\")]").should(visible, Duration.ofSeconds(12));
 
