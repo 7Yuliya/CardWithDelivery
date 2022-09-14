@@ -28,7 +28,7 @@ public class CardWithDeliveryTest {
 
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
+        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
@@ -42,7 +42,7 @@ public class CardWithDeliveryTest {
 
 
         $x("//*[@placeholder = \"Город\"]").setValue("Калуга");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("27.10.2022"));
+        String verificationDate = LocalDate.now().plusDays(10).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("Андреев Иван");
         $x("//*[@name = \"phone\"]").setValue("+79126547467");
@@ -55,7 +55,7 @@ public class CardWithDeliveryTest {
     public void shouldEnteringInvalidDataInTheCityField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Kazan");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
+        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
@@ -69,7 +69,7 @@ public class CardWithDeliveryTest {
     public void shouldClearingTheCityField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
+        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
@@ -98,7 +98,7 @@ public class CardWithDeliveryTest {
     public void shouldEnteringInvalidDataInTheLastNameAndFirstNameField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
+        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("Ivanov Andrey");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
@@ -113,7 +113,7 @@ public class CardWithDeliveryTest {
     public void shouldClearingTheLastNameAndFirstNameField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
+        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
@@ -128,7 +128,7 @@ public class CardWithDeliveryTest {
     public void shouldEnteringInvalidDataInTheMobilePhoneField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
+        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("9214567845");
@@ -143,7 +143,7 @@ public class CardWithDeliveryTest {
     public void shouldClearingTheMobilePhoneField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
+        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("");
@@ -158,7 +158,7 @@ public class CardWithDeliveryTest {
     public void shouldTestCheckboxAgreement() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("20.09.2022"));
+        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
