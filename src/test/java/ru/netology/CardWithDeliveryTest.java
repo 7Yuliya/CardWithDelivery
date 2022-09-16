@@ -2,6 +2,7 @@
 package ru.netology;
 
 
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,8 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class CardWithDeliveryTest {
@@ -28,35 +28,43 @@ public class CardWithDeliveryTest {
 
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        String planningDate = generateDate(4);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
         $x("//*[@data-test-id = \"agreement\"]").click();
         $x("//*[@class =\"button__text\" ]").click();
         $x("//* [contains(text(),\"Успешно!\")]").should(visible, Duration.ofSeconds(12));
+        $(".notification__content").shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate), Duration.ofSeconds(15)).shouldBe(visible);
     }
+
+    private String generateDate(int days) {
+        return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    }
+
 
     @Test
     public void shouldSendingAFormWithValidData2() {
 
 
         $x("//*[@placeholder = \"Город\"]").setValue("Калуга");
-        String verificationDate = LocalDate.now().plusDays(10).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        String planningDate = generateDate(4);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("Андреев Иван");
         $x("//*[@name = \"phone\"]").setValue("+79126547467");
         $x("//*[@data-test-id = \"agreement\"]").click();
         $x("//*[@class =\"button__text\" ]").click();
         $x("//* [contains(text(),\"Успешно!\")]").should(visible, Duration.ofSeconds(12));
+        $(".notification__content").shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate), Duration.ofSeconds(15)).shouldBe(visible);
     }
+
 
     @Test
     public void shouldEnteringInvalidDataInTheCityField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Kazan");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        String planningDate = generateDate(4);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
         $x("//*[@data-test-id = \"agreement\"]").click();
@@ -69,8 +77,8 @@ public class CardWithDeliveryTest {
     public void shouldClearingTheCityField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        String planningDate = generateDate(4);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
         $x("//*[@data-test-id = \"agreement\"]").click();
@@ -80,16 +88,17 @@ public class CardWithDeliveryTest {
     }
 
     @Test
-    public void shouldClearingTheDateOfTheMeetingField() {
+    public void shouldEnteringWrongDateInTheDateOfTheMeetingField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern(""));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        // String planningDate = LocalDate.now().plusDays(4).format(DateTimeFormatter.ofPattern(""));
+        String planningDate = generateDate(0);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
         $x("//*[@data-test-id = \"agreement\"]").click();
         $x("//*[@class =\"button__text\" ]").click();
-        $x("//* [contains(text(),\"Неверно введена дата\")]").should(visible, Duration.ofSeconds(12));
+        $x("//* [contains(text(),\"Заказ на выбранную дату невозможен\")]").should(visible, Duration.ofSeconds(12));
 
 
     }
@@ -98,8 +107,8 @@ public class CardWithDeliveryTest {
     public void shouldEnteringInvalidDataInTheLastNameAndFirstNameField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        String planningDate = generateDate(4);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("Ivanov Andrey");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
         $x("//*[@data-test-id = \"agreement\"]").click();
@@ -113,8 +122,8 @@ public class CardWithDeliveryTest {
     public void shouldClearingTheLastNameAndFirstNameField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        String planningDate = generateDate(4);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
         $x("//*[@data-test-id = \"agreement\"]").click();
@@ -128,8 +137,8 @@ public class CardWithDeliveryTest {
     public void shouldEnteringInvalidDataInTheMobilePhoneField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        String planningDate = generateDate(4);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("9214567845");
         $x("//*[@data-test-id = \"agreement\"]").click();
@@ -143,8 +152,8 @@ public class CardWithDeliveryTest {
     public void shouldClearingTheMobilePhoneField() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        String planningDate = generateDate(4);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("");
         $x("//*[@data-test-id = \"agreement\"]").click();
@@ -158,8 +167,8 @@ public class CardWithDeliveryTest {
     public void shouldTestCheckboxAgreement() {
 
         $x("//*[@placeholder = \"Город\"]").setValue("Казань");
-        String verificationDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + verificationDate);
+        String planningDate = generateDate(4);
+        $x("//*[@data-test-id = \"date\"]//self::input").doubleClick().sendKeys(Keys.DELETE + planningDate);
         $x("//*[@name = \"name\"]").setValue("Иванов Андрей");
         $x("//*[@name = \"phone\"]").setValue("+79214567845");
         $x("//*[@class =\"button__text\" ]").click();
